@@ -33,7 +33,8 @@ def main():
         blur = cv2.medianBlur(mask, 15)
         blur = cv2.GaussianBlur(blur, (5, 5), 0)
         thresh = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
-        cnts = cv2.findContours(thresh.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)[1]
+        cnts = cv2.findContours(thresh.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)[0]
+        print("CNTS=",cnts)
         center = None
         if len(cnts) >= 1:
             contour = max(cnts, key=cv2.contourArea)
@@ -55,7 +56,7 @@ def main():
                 blur1 = cv2.medianBlur(blackboard_gray, 15)
                 blur1 = cv2.GaussianBlur(blur1, (5, 5), 0)
                 thresh1 = cv2.threshold(blur1, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
-                blackboard_cnts = cv2.findContours(thresh1.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)[1]
+                blackboard_cnts = cv2.findContours(thresh1.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)[0]
                 if len(blackboard_cnts) >= 1:
                     cnt = max(blackboard_cnts, key=cv2.contourArea)
                     print(cv2.contourArea(cnt))
@@ -81,7 +82,7 @@ def keras_predict(model, image):
     print("processed: " + str(processed.shape))
     pred_probab = model.predict(processed)[0]
     pred_class = list(pred_probab).index(max(pred_probab))
-    output_text+=hindi_unicode[str(pred_class)]
+    #output_text+=hindi_unicode[str(pred_class)]
     return max(pred_probab), pred_class
 
 
@@ -96,4 +97,3 @@ def keras_process_image(img):
 
 keras_predict(model1, np.zeros((32, 32, 1), dtype=np.uint8))
 main()
-
