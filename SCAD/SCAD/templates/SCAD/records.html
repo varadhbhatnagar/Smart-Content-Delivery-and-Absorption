@@ -1,0 +1,31 @@
+{% extends 'SCAD/base.html' %}
+
+{% block title %}
+    Records
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Subject Record Table</h2>
+    <p>A summary of all the subjects and their respective CADS Scores</p>            
+    <table class="table">
+      <thead>
+        <tr>
+          <th>School</th>
+          <th>Standard</th>
+          <th>Subject</th>
+          <th>Teacher</th>
+          <th>Content Absorption Score</th>
+          <th>Content Delivery Score</th>
+          <th>CADS</th>
+        </tr>
+        {% for sub in subjects%}
+            <tr><th><a href="">Empty</a></th><th>{{ sub.Class }}</th><th>{{sub.Subject_Name}}</th><th>{{sub.Teacher}}</th>
+              <th>{{sub.CA_Score}}</th><th>{{sub.CD_Score}}</th><th>50</th>              
+               </tr>
+        {% endfor %}
+      </thead>
+    </table>
+  </div>
+  
+{% endblock %}

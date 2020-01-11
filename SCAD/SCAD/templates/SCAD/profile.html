@@ -1,0 +1,17 @@
+{% extends "SCAD/base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div style="text-align: center">
+    <h3>My Profile</h3>
+    <br>
+    <ul>
+        <li>Username : {{ my_profile.user.username }}</li>
+        <li>First Name : {{ my_profile.First_Name }}</li>
+        <li>Last Name : {{ my_profile.Last_Name }}</li>
+        <li>Role : {{ my_profile.Role }}</li>
+        <li>Class : {{ my_profile.Class }}</li>
+        <li>Subject : {{ my_profile.Subject }}</li>
+        <li>Section : {{ my_profile.Section }}</li>
+    </ul>
+</div>
+{% endblock %}
