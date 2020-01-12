@@ -2,16 +2,42 @@
 {% block title %}Profile{% endblock %}
 {% block content %}
 <div style="text-align: center">
-    <h3>My Profile</h3>
+    <h2>My Profile</h2>
     <br>
-    <ul>
-        <li>Username : {{ my_profile.user.username }}</li>
-        <li>First Name : {{ my_profile.First_Name }}</li>
-        <li>Last Name : {{ my_profile.Last_Name }}</li>
-        <li>Role : {{ my_profile.Role }}</li>
-        <li>Class : {{ my_profile.Class }}</li>
-        <li>Subject : {{ my_profile.Subject }}</li>
-        <li>Section : {{ my_profile.Section }}</li>
+    <ul class ="list-group" style="font-size: 20px">
+        <li class="list-group-item"><b>Username</b> : {{ my_profile.user.username }}</li>
+        <li class="list-group-item"><b>First Name</b> : {{ my_profile.First_Name }}</li>
+        <li class="list-group-item"><b>Last Name</b> : {{ my_profile.Last_Name }}</li>
+        <li class="list-group-item"><b>Role</b> : {{ my_profile.Role }}</li>
+        {% if my_profile.Role == 'Student' and my_profile.Class == None and my_profile.Section == None %}
+             <form action="/profile/" method="post">
+                {% csrf_token %}
+                  Class: <input type="text" name="standard"><br>
+                  Section: <input type="text" name="section"><br>
+                  <input type="submit" value="Submit">
+            </form>
+
+        {% elif my_profile.Role == 'Teacher' and my_profile.Class == None and my_profile.Section == None and my_profile.Subject == None %}
+            <form action="/profile/" method="post">
+                {% csrf_token %}
+                  Class: <input type="text" name="standard"><br>
+                  Section: <input type="text" name="section"><br>
+                  Subject: <input type="text" name="subject"><br>
+                  <input type="submit" value="Submit">
+            </form>
+        {% elif my_profile.Role == 'Teacher' %}
+
+            <li class="list-group-item"><b>Class</b> : {{ my_profile.Class }}</li>
+            <li class="list-group-item"><b>Subject</b> : {{ my_profile.Subject }}</li>
+            <li class="list-group-item"><b>Section</b> : {{ my_profile.Section }}</li>
+
+         {% elif my_profile.Role == 'Student' %}
+
+            <li class="list-group-item"><b>Class</b> : {{ my_profile.Class }}</li>
+            <li class="list-group-item"><b>Section</b> : {{ my_profile.Section }}</li>
+
+        {% endif %}
+
     </ul>
 </div>
 {% endblock %}

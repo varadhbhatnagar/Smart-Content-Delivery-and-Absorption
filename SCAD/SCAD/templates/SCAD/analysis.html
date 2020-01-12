@@ -18,16 +18,16 @@
           Plotly.newPlot('myDiv', data, layout);
 </script>
 <div id="myDiv1" style="height: 50%; width: 50%; float: right;">  </div>
-<!-- 
-<script>   
+
+<script>
          var amount1 = {% autoescape off %}{{ value }}{% endautoescape %}
          var sum = 0
          for( var i = 0; i< amount1.length; i++){
                 sum = sum +  amount1[i];
-         }           
+         }
          for( var i = 0; i< amount1.length; i++){
                 amount1[i] = amount1[i] / sum * 200;
-         }           
+         }
          var data = [{
             y : {% autoescape off %}{{ value }}{% endautoescape %},
             x : {% autoescape off %}{{ label }}{% endautoescape %},
@@ -38,7 +38,7 @@
                 color: ['rgb(93, 244, 214)', 'rgb(255, 144, 14)', 'rgb(131, 164, 214)', 'rgb(193, 164, 214)', 'rgb(9, 164, 214)']
             }
           }];
-          
+
           var layout = {
             title: 'Bubble chart',
             height: 600,
@@ -46,7 +46,7 @@
           };
 
           Plotly.newPlot('myDiv1', data, layout);
-</script> -->
+</script> 
 
 </body>
 {% endblock %}

@@ -13,9 +13,12 @@ class Profile(models.Model):
     First_Name = models.CharField(max_length=30)
     Last_Name = models.CharField(max_length=30)
     Role = models.CharField(max_length=18, choices=ROLE_CHOICES)
-    Class = models.IntegerField(blank=True)
-    Subject = models.CharField(max_length=50, blank=True)
-    Section = models.CharField(max_length=2, blank=True)
+    Class = models.IntegerField(blank=True, null=True)
+    Subject = models.CharField(max_length=50, blank=True, null=True)
+    Section = models.CharField(max_length=2, blank=True, null=True)
+
+    def __str__(self):
+        return "%s %s" % (self.First_Name, self.Last_Name)
 
 # class Teacher(models.Model):
 #     Teacher_First_Name = models.CharField(max_length=30)
@@ -30,8 +33,8 @@ class Subject(models.Model):
     Class = models.IntegerField()
     Section = models.CharField(max_length=2)
     Teacher = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    CA_Score = models.FloatField()
-    CD_Score = models.FloatField()
+    CA_Score = models.FloatField(blank = True, null=True)
+    CD_Score = models.FloatField(blank = True, null = True)
 
     def __str__(self):
         return "%s %s %s" % (self.Subject_Name, self.Class, self.Section)
